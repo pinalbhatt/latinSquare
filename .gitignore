@@ -25,3 +25,37 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+
+#npm failure logs
+npm-debug.log
+log/**/*.log
+log/**/*.json
+!log/.empty
+!log/checkout/.empty
+
+.npm
+.node-gyp
+
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
+*.iml
+
+
+## Directory-based project format:
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+.idea/workspace.xml
+
+# JIRA plugin
+atlassian-ide-plugin.xml
