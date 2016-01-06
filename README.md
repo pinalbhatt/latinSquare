@@ -20,31 +20,33 @@ This *latinsquare* package can be used to generate a Latin Square from an initia
 
 Usage
 -------
-Basic Usage
+*Basic Usage*
 
 > **To initiate object:**
 
 >  var latinSquare = require("latinsquare");
 
-Create square from initial row of elements
+*Create square from initial row of elements*
 
 > **To add to your project:**
 
 >  var square1 = latinSquare.generate(['a', 'b', 'c', 'd', 'e']);
->  // ===> will return an 2D Array. Something like this:
->  a,b,c,e,d
->  d,a,b,c,e
->  b,d,e,a,c
->  c,e,a,d,b
->  e,c,d,b,a
 
-Create square for specific size
+ // ===> will return an 2D Array. Something like this:
+a,b,c,e,d
+d,a,b,c,e
+b,d,e,a,c
+c,e,a,d,b
+e,c,d,b,a
+
+*Create square for specific size*
 
 > **To create square for specific size:**
 
 >  var square2 = latinSquare.generate(4);
->  // ===> will return 4 X 4 lating square as 2D array  with numbers 1,2,3,4. Something like this
->  2,1,4,3
+
+// ===> will return 4 X 4 lating square as 2D array  with numbers 1,2,3,4. Something like this
+2,1,4,3
 4,2,3,1
 3,4,1,2
 1,3,2,4
