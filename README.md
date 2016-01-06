@@ -33,10 +33,10 @@ Create square from initial row of elements
 >  var square1 = latinSquare.generate(['a', 'b', 'c', 'd', 'e']);
 >  // ===> will return an 2D Array. Something like this:
 >  a,b,c,e,d
-d,a,b,c,e
-b,d,e,a,c
-c,e,a,d,b
-e,c,d,b,a
+>  d,a,b,c,e
+>  b,d,e,a,c
+>  c,e,a,d,b
+>  e,c,d,b,a
 
 Create square for specific size
 
