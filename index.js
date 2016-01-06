@@ -24,27 +24,18 @@ module.exports.generate = function(input){
 }
 
 module.exports.validate = function(lSquare){
-
-    var result = _validateLatinSquare(lSquare);
-    if( result === ""){
-        return true;
-    }
-    else    {
-        return false;
-    }
-
+    return !_validateLatinSquare(lSquare);
 }
 
 
 function generateLatinSquare(elements){
     if(_isValidElementsArr(elements)){
         var lSquare = generateDefaultLatinSquare(elements.length);
-        var sq = lSquare.square;
+        var sq = lSquare;
         for(var r=0; r< sq.length; r++ ){
             for(var c=0; c < sq.length; c++){
-                lSquare.square[r][c] = elements[lSquare.square[r][c] - 1]
+                lSquare[r][c] = elements[lSquare[r][c] - 1]
             }
-            lSquare.elements = elements;
         }
         return lSquare;
 
@@ -90,13 +81,6 @@ function generateDefaultLatinSquare(size){
 
             }
         }
-
-        return {
-            size: size,
-            elements: elements,
-            square: lSquare
-        }
-
 
     }
     return lSquare;
@@ -160,27 +144,35 @@ function _removeItemFromArray(arr) {
 
 function _validateLatinSquare(lSquare){
 
-    //Check-1 lSquare.size is integer > 0
-    if(!_isValidSize(lSquare.size)){
-        return "Invalid Size";
+    var i, j, size ;
+    //Check lSquare should be an 2d array with size > 0
+    if(!Array.isArray(lSquare)){
+        return 1;
     }
 
-    //Check-2 elements should be an array
-    if(!Array.isArray(lSquare.elements)){
-        return "elements is not an array";
+    size = lSquare.length;
+    if(!_isValidSize(size)){
+        return 2;
     }
 
-    //Check-3 elements should be an valid array with unique elements
-    if(!_isValidElementsArr(lSquare.elements)){
-        return "elements is not an valid array";
+    for(i in lSquare){
+        if(!Array.isArray(lSquare[i])){
+            return 3;
+        }
+        var sz = (lSquare[i]).length;
+        if(!_isValidSize(sz)){
+            return 4;
+        }
+
+        if(sz !== size){
+            return 5
+        }
     }
 
-    //Check-4 elements.length === size
-    if(lSquare.elements.length !== lSquare.size){
-        return "elements array length does not match size";
-    }
 
-    //Check-5 square should be 2D array with size x size
+
+
+    /*//Check-5 square should be 2D array with size x size
     if(lSquare.square.length !== lSquare.size){
         return "square size invalid";
     }
@@ -191,20 +183,20 @@ function _validateLatinSquare(lSquare){
         if(lSquare.square[i].length !== lSquare.size){
             return "square row " + i + " is not of proper size";
         }
-    }
+    }*/
 
     //Check-6 basic latin square logic - item should be unique accross row and col
-    for(var r = 0; r< lSquare.size; r++){
-        for(var c = 0; c< lSquare.size; c++){
-            var item = lSquare.square[r][c];
-            for(var r1 = 0; r1< lSquare.size; r1++){
-                if(r !== r1 && lSquare.square[r1][c] === lSquare.square[r][c])   {
-                    return "duplicate item in col " + c;
+    for(var r = 0; r < size; r++){
+        for(var c = 0; c < size; c++){
+            var item = lSquare[r][c];
+            for(var r1 = 0; r1< size; r1++){
+                if(r !== r1 && lSquare[r1][c] === lSquare[r][c])   {
+                    return 6;
                 }
             }
-            for(var c1 = 0; c1< lSquare.size; c1++){
-                if(c !== c1 && lSquare.square[r][c1] === lSquare.square[r][c])   {
-                    return "duplicate item in row " + r;
+            for(var c1 = 0; c1< size; c1++){
+                if(c !== c1 && lSquare[r][c1] === lSquare[r][c])   {
+                    return 7;
                 }
 
             }
@@ -212,7 +204,7 @@ function _validateLatinSquare(lSquare){
         }
     }
 
-    //Check-7
 
-    return "";
+
+    return 0;
 }
