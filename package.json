@@ -1,6 +1,6 @@
 {
   "name": "latinsquare",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Latin Square Generation & Validation",
   "main": "index.js",
   "scripts": {
