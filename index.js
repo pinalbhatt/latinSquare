@@ -171,21 +171,7 @@ function _validateLatinSquare(lSquare){
 
 
 
-
-    /*//Check-5 square should be 2D array with size x size
-    if(lSquare.square.length !== lSquare.size){
-        return "square size invalid";
-    }
-    for(var i in lSquare.square){
-        if(!Array.isArray(lSquare.square[i])){
-            return "square row " + i + " is not an array";
-        }
-        if(lSquare.square[i].length !== lSquare.size){
-            return "square row " + i + " is not of proper size";
-        }
-    }*/
-
-    //Check-6 basic latin square logic - item should be unique accross row and col
+    //Check-6 basic latin square logic - item should be unique across row and col
     for(var r = 0; r < size; r++){
         for(var c = 0; c < size; c++){
             var item = lSquare[r][c];
