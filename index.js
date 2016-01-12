@@ -1,11 +1,7 @@
-'use strict';
+"use strict";
 
-/*
-* latinSquare
-*       - size
-*       - elements: array of unique elements constituting latin square
-*       - square: 2D array with acutal lating square
-* */
+var genHelper = require("./genHelper");
+
 module.exports.generate = function(input){
     var elements = [];
     var size = 0;
@@ -24,9 +20,14 @@ module.exports.generate = function(input){
 }
 
 module.exports.validate = function(lSquare){
-    return !_validateLatinSquare(lSquare);
+    return _validateLatinSquare(lSquare);
 }
 
+module.exports.isValidLatinSquare = function(lSquare){
+    var valid =  _validateLatinSquare(lSquare);
+    if(valid === "") return true;
+    else return false;
+}
 
 function generateLatinSquare(elements){
     if(_isValidElementsArr(elements)){
@@ -52,23 +53,22 @@ function generateDefaultLatinSquare(size){
         var elements = [];
         for(var i = 1; i<= size; i++){
             elements.push(i);
-            //lSquare[i-0] = [];
         }
         for( i = 0; i< size; i++){
             lSquare[i] = new Array(size);
         }
         var row = elements.slice();
-        row = _shuffle(row);
+        row = genHelper.shuffleArr(row);
         lSquare[0] = row;
         for(var r = 1; r< size; r++){
             for(var c = 0; c < size; c++){
                 var items = elements.slice();
-                items = _shuffle(items);
+                items = genHelper.shuffleArr(items);
                 for(var c1 = 0; c1 < c; c1++){
-                    _removeItemFromArray(items, lSquare[r][c1]);
+                    genHelper.removeItemFromArrayByValue(items, lSquare[r][c1]);
                 }
                 for(var r1 = 0; r1 < r; r1++){
-                    _removeItemFromArray(items, lSquare[r1][c]);
+                    genHelper.removeItemFromArrayByValue(items, lSquare[r1][c]);
                 }
 
                 if(items[0] === undefined){
@@ -84,24 +84,6 @@ function generateDefaultLatinSquare(size){
 
     }
     return lSquare;
-}
-
-
-function _shuffle(arr){
-    if(!Array.isArray(arr)){
-        throw new TypeError('Expected an array');
-    }
-
-    var result = arr.slice();
-    var len  = arr.length;
-    var rnd,tmp;
-    while(len){
-        rnd = Math.floor(Math.random() * len--);
-        tmp = result[len];
-        result[len] = result[rnd];
-        result[rnd] = tmp;
-    }
-    return result;
 }
 
 function _isValidSize(n){
@@ -131,45 +113,33 @@ function _isValidElementsArr(arr){
 
 }
 
-function _removeItemFromArray(arr) {
-    var what, a = arguments, L = a.length, ax;
-    while (L > 1 && arr.length) {
-        what = a[--L];
-        while ((ax= arr.indexOf(what)) !== -1) {
-            arr.splice(ax, 1);
-        }
-    }
-    return arr;
-}
 
 function _validateLatinSquare(lSquare){
 
     var i, j, size ;
     //Check lSquare should be an 2d array with size > 0
     if(!Array.isArray(lSquare)){
-        return 1;
+        return "Not An Array";
     }
 
     size = lSquare.length;
     if(!_isValidSize(size)){
-        return 2;
+        return "Invalid Size";
     }
 
     for(i in lSquare){
         if(!Array.isArray(lSquare[i])){
-            return 3;
+            return "Not a valid 2D Array";
         }
         var sz = (lSquare[i]).length;
         if(!_isValidSize(sz)){
-            return 4;
+            return "Not a valid sized 2D Array";
         }
 
         if(sz !== size){
-            return 5
+            return "Not a valid 2D square Array";
         }
     }
-
-
 
     //Check-6 basic latin square logic - item should be unique across row and col
     for(var r = 0; r < size; r++){
@@ -177,20 +147,17 @@ function _validateLatinSquare(lSquare){
             var item = lSquare[r][c];
             for(var r1 = 0; r1< size; r1++){
                 if(r !== r1 && lSquare[r1][c] === lSquare[r][c])   {
-                    return 6;
+                    return item + " repeated in column " + c;
                 }
             }
             for(var c1 = 0; c1< size; c1++){
                 if(c !== c1 && lSquare[r][c1] === lSquare[r][c])   {
-                    return 7;
+                    return item + " repeated in row " + r;
                 }
 
             }
 
         }
     }
-
-
-
-    return 0;
+    return "";
 }

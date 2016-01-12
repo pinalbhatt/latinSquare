@@ -20,15 +20,12 @@ This *latinsquare* package can be used to generate a Latin Square from an initia
 
 Usage
 -------
-*Basic Usage*
-
-> **To initiate object:**
+**To initiate object:**
 
 >  var latinSquare = require("latinsquare");
 
-*Create square from initial row of elements*
+**Create square from initial row of elements**
 
-> **To add to your project:**
 
 >  var square1 = latinSquare.generate(['a', 'b', 'c', 'd', 'e']);
 
@@ -45,9 +42,7 @@ c,e,a,d,b
 e,c,d,b,a
 
 
-*Create square for specific size*
-
-> **To create square for specific size:**
+**Create square for specific size**
 
 >  var square2 = latinSquare.generate(4);
 
@@ -61,3 +56,18 @@ e,c,d,b,a
 
 1,3,2,4
 
+**Validation APIs**
+ > var latinSquare = require("latinsquare");
+ 
+ > var square = latinSquare.generate(5);
+ 
+ > latinsquare.validate(square);
+ 
+ > latinsquare.isValidLatinSquare(square); 
+ 
+ // ===> 
+ 
+ validate(square) returns empty string if square is a valid Latin Square or else returns string with error message.
+ 
+ isValidLatinSquare(square) returns boolean true or false.
+ 

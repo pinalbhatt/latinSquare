@@ -1,11 +1,9 @@
 {
   "name": "latinsquare",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Latin Square Generation & Validation",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pinalbhatt/latinSquare.git"
