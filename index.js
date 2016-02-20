@@ -1,6 +1,5 @@
 "use strict";
 
-var genHelper = require("./genHelper");
 
 module.exports.generate = function(input){
     var elements = [];
@@ -17,18 +16,19 @@ module.exports.generate = function(input){
     else {
         throw new TypeError('Expected an integer or array with unique elements');
     }
-}
+};
 
 module.exports.validate = function(lSquare){
     return _validateLatinSquare(lSquare);
-}
+};
 
 module.exports.isValidLatinSquare = function(lSquare){
     var valid =  _validateLatinSquare(lSquare);
     if(valid === "") return true;
     else return false;
-}
+};
 
+//region Helper Function
 function generateLatinSquare(elements){
     if(_isValidElementsArr(elements)){
         var lSquare = generateDefaultLatinSquare(elements.length);
@@ -58,17 +58,17 @@ function generateDefaultLatinSquare(size){
             lSquare[i] = new Array(size);
         }
         var row = elements.slice();
-        row = genHelper.shuffleArr(row);
+        row = _shuffleArr(row);
         lSquare[0] = row;
         for(var r = 1; r< size; r++){
             for(var c = 0; c < size; c++){
                 var items = elements.slice();
-                items = genHelper.shuffleArr(items);
+                items = _shuffleArr(items);
                 for(var c1 = 0; c1 < c; c1++){
-                    genHelper.removeItemFromArrayByValue(items, lSquare[r][c1]);
+					_removeItemFromArrayByValue(items, lSquare[r][c1]);
                 }
                 for(var r1 = 0; r1 < r; r1++){
-                    genHelper.removeItemFromArrayByValue(items, lSquare[r1][c]);
+                    _removeItemFromArrayByValue(items, lSquare[r1][c]);
                 }
 
                 if(items[0] === undefined){
@@ -161,3 +161,32 @@ function _validateLatinSquare(lSquare){
     }
     return "";
 }
+
+function _shuffleArr(arr){
+    if(!Array.isArray(arr)){
+        throw new TypeError('Expected an array');
+    }
+
+    var result = arr.slice();
+    var len  = arr.length;
+    var rnd,tmp;
+    while(len){
+        rnd = Math.floor(Math.random() * len--);
+        tmp = result[len];
+        result[len] = result[rnd];
+        result[rnd] = tmp;
+    }
+    return result;
+}
+
+function _removeItemFromArrayByValue(arr) {
+	var what, a = arguments, L = a.length, ax;
+	while (L > 1 && arr.length) {
+		what = a[--L];
+		while ((ax= arr.indexOf(what)) !== -1) {
+			arr.splice(ax, 1);
+		}
+	}
+	return arr;
+}
+//endregion

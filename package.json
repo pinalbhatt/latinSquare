@@ -1,20 +1,26 @@
 {
   "name": "latinsquare",
-  "version": "0.0.5",
-  "description": "Latin Square Generation & Validation",
+  "version": "0.0.6",
+  "description": "LatinSquare Generation & Validation",
+  "author": "Pinal Bhatt <self@pbdesk.io> (http://pbdesk.io)",
   "main": "index.js",
-
+  "scripts": {
+	"test": "node test.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pinalbhatt/latinSquare.git"
   },
   "keywords": [
     "latinSquare",
-    "latin",
-    "square",
-    "math"
+    "math",
+    "kenken",
+    "sudoku",
+    "math",
+    "games",
+    "math",
+    "puzzles"
   ],
-  "author": "Pinal Bhatt",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pinalbhatt/latinSquare/issues"
