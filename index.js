@@ -1,6 +1,5 @@
 "use strict";
 
-
 module.exports.generate = function(input){
     var elements = [];
     var size = 0;
@@ -77,11 +76,8 @@ function generateDefaultLatinSquare(size){
                 else{
                     lSquare[r][c] = items[0];
                 }
-
-
             }
         }
-
     }
     return lSquare;
 }
@@ -109,10 +105,7 @@ function _isValidElementsArr(arr){
     else {
         return false;
     }
-
-
 }
-
 
 function _validateLatinSquare(lSquare){
 
